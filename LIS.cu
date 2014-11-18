@@ -21,6 +21,9 @@ int LISgetPos(int vet[],int tam){
 	for(i =0;i < tam;i++){
 
 		if(vet[i]== -1){
+#ifdef DEBUG
+	printf("Posição valida obtida: %d !\n",i);
+#endif
 			return i;
 		}
 	}
