@@ -37,9 +37,9 @@ void rotation(char *array, int length){
   array[i] = temp;
 }
 
-unsigned long long fatorialHost(unsigned long long n){
+unsigned long fatorialHost(unsigned long n){
 	int i;
-	unsigned long long result = 1;
+	unsigned long result = 1;
 	for(i = n; i > 1; i--){
 		result *= i;
 	}
@@ -49,11 +49,11 @@ unsigned long long fatorialHost(unsigned long long n){
 //Calcula o LIS de todo o conjunto R partindo do pivor principal da ordem lexico gráfica
 //Caso encontre um valor que é menor do que o máximo local de S, então ele retorna e não faz os outros calculos.
 __global__
-void decideLS(char* d_lMax_S, int length, unsigned long long maxSeq, int numThreads){
+void decideLS(char* d_lMax_S, int length, unsigned long maxSeq, int numThreads){
 	extern __shared__ char s_vet[];
 	int tid = threadIdx.x + blockIdx.x*blockDim.x; 	
 	int s_index = length*threadIdx.x; //Indice da shared memory
-	unsigned long long int indexSeq = tid;
+	unsigned long int indexSeq = tid;
 
 	//Esses dois vetores são utilizados no LIS e no LDS, são declarados do lado de fora para
 	//gastar menos memória e não ter necessidade de dar malloc.
@@ -106,7 +106,6 @@ void decideLS(char* d_lMax_S, int length, unsigned long long maxSeq, int numThre
 void calcLMaxGlobalS(char* lMax_globalS, char* lMax_localS, int tamVec){
 	//Número de conjuntos
 	for(int i = 0; i < tamVec; i++){
-		//printf("%d\n", lMax_localS[i]);
 		if(*lMax_globalS < lMax_localS[i]){
 			*lMax_globalS = lMax_localS[i];
 		}
@@ -144,7 +143,7 @@ int main(int argc, char *argv[]){
 	start = clock();
 	
 
-	unsigned long long numSeq = fatorialHost(length-1)/2;
+	unsigned long numSeq = fatorialHost(length-1)/2;
 	
 	dim3 num_blocks(ceil(((float) NUM_THREADS)/(float) THREAD_PER_BLOCK));
 	int tam_shared = length*THREAD_PER_BLOCK;
