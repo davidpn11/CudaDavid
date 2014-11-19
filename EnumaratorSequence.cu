@@ -97,6 +97,12 @@ int qtdMenores(char* vet, int num, int n){
 
 __device__
 unsigned long long getIndexLexicographically(char* vet, int n){
+
+	#ifdef DEBUG 
+		printf("getIndexLexicographically\n");
+	#endif	
+
+
 	unsigned long long index = 0;
 	int i;
 	for(i = 0; i < n-1; i++){
@@ -107,6 +113,11 @@ unsigned long long getIndexLexicographically(char* vet, int n){
 
 __device__
 unsigned long long getIndex(char* vet, int n){
+
+	#ifdef DEBUG 
+		printf("getIndex\n");
+	#endif
+
 	unsigned long long index = 0;
 	int i;
 	int pos_num2 = -1, pos_num3 = -1;
